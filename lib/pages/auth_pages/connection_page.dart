@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'login_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -17,7 +17,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/lightbulb_background.png', // Assurez-vous d'avoir cette image dans votre répertoire assets
+            'assets/images/lightbulb_background.jpg',
             fit: BoxFit.cover,
           ),
           SafeArea(
@@ -28,22 +28,47 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 20),
-                    Text(
-                      'ECOWATT',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'EC',
+                              style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 28,
+                                fontFamily: 'LufgaSemiBold',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 2),
+                            SvgPicture.asset('assets/images/logo.svg', height: 28),
+                            SizedBox(width: 10),
+                            Text(
+                              'WATT',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontFamily: 'LufgaSemiBold',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20), // Espacement vertical entre les deux éléments
+                        Text(
+                          'Gérez votre consommation d\'électricité en toute simplicité.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Gérez votre consommation d\'électricité en toute simplicité.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+                  ),
                     SizedBox(height: 20),
                     TextButton(
                       onPressed: () {
