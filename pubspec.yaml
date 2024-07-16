@@ -78,9 +78,10 @@ flutter:
     - family: Lufga
       fonts:
         - asset: fonts/LufgaMedium.ttf
+          weight: 500
         - asset: fonts/LufgaBold.ttf
-          weight: 700
         - asset: fonts/LufgaSemiBold.ttf
+        - asset: fonts/LufgaExtraBold.ttf
           weight: 800
   #   - family: Trajan Pro
   #     fonts:

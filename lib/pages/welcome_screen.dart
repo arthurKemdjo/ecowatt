@@ -44,23 +44,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: 50),
                       Text(
                         'Bienvenue',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 28,
-                          fontFamily: 'LufgaSemiBold',
-                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          fontFamily: 'Lufga',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         'à votre',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 28,
-                          fontFamily: 'LufgaSemiBold',
-                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          fontFamily: 'Lufga',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Row(
@@ -69,22 +69,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             'EC',
                             style: TextStyle(
                               color: Colors.orange,
-                              fontSize: 28,
-                              fontFamily: 'LufgaSemiBold',
-                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           SizedBox(width: 2), // Espacement entre le texte et l'image
-                          // Remplacez l'URL ci-dessous par l'URL de votre image SVG
                           SvgPicture.asset('assets/images/logo.svg', height: 28),
                           SizedBox(width: 10), // Espacement entre l'image et le texte
                           Text(
                             'WATT',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 28,
-                              fontFamily: 'LufgaSemiBold',
-                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
@@ -113,8 +112,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       child: Text('Démarrer', style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'LufgaMedium',
+                          fontSize: 10,
+                          fontFamily: 'Lufga',
+                          fontWeight: FontWeight.w500,
                         ),),
                     ),
                     SizedBox(height: 20),

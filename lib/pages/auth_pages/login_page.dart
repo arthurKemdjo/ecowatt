@@ -1,5 +1,6 @@
 import 'package:ecowatt/pages/auth_pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../home_page.dart';
 
@@ -23,8 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/lightbulb_background.png', // Assurez-vous d'avoir cette image dans votre répertoire assets
+            'assets/images/light.jpg',
             fit: BoxFit.cover,
+          ),Container(
+            color: Colors.black.withOpacity(0.8),
           ),
           SafeArea(
             child: Padding(
@@ -32,67 +35,127 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'EC',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 18,
+                            fontFamily: 'Lufga',
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                        SvgPicture.asset('assets/images/logo.svg', height: 28),
+                        SizedBox(width: 5),
+                        Text(
+                          'WATT',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: 'Lufga',
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ],
+                    ),
+                  SizedBox(height: 80),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'ECOWATT',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Bienvenue parmis nous !',
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Connectez-vous à votre compte',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(height: 16),
+                        RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          'Bienvenue',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            color: Colors.orange,
+                                            fontFamily: 'Lufga',
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),                  
+                                    WidgetSpan(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          'parmis nous !',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            color: Colors.white,
+                                            fontFamily: 'Lufga',
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                      SizedBox(height: 20),
+
+                      RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          'Connectez-vous à votre compte',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.white,
+                                            fontFamily: 'Lufga',
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ), 
+                                  ],
+                                ),
+                              ),
+                      SizedBox(height: 60),
                       TextField(
                         controller: _usernameController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.person, color: Colors.white),
+                          prefixIcon: Icon(Icons.person, color: Colors.black),
                           hintText: 'Nom d\'utilisateur',
-                          hintStyle: TextStyle(color: Colors.white70),
+                          hintStyle: TextStyle(color: Color(0xFF8A8686), fontSize: 10),
                           filled: true,
-                          fillColor: Colors.black.withOpacity(0.5),
+                          fillColor: Colors.white.withOpacity(1),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
                           ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      TextField(
-                        controller: _passwordController,
-                        obscureText: true,
+                      SizedBox(height: 40),
+                       TextField(
+                        controller:  _passwordController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock, color: Colors.white),
+                          prefixIcon: Icon(Icons.lock, color: Colors.black),
                           hintText: 'Mot de passe',
-                          hintStyle: TextStyle(color: Colors.white70),
+                          hintStyle: TextStyle(color: Color(0xFF8A8686), fontSize: 10),
                           filled: true,
-                          fillColor: Colors.black.withOpacity(0.5),
+                          fillColor: Colors.white.withOpacity(1),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
                           ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                         ),
                       ),
-                      SizedBox(height: 24),
+                      SizedBox(height: 70),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
@@ -104,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: Colors.orange,
                           foregroundColor: Colors.white,
                           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                          textStyle: TextStyle(fontSize: 20),
+                          textStyle: TextStyle(fontSize: 12, color: Colors.white, fontFamily: "Lufga", fontWeight:FontWeight.w600,),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -112,12 +175,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text('Connexion'),
                       ),
                       SizedBox(height: 24,),
-                      TextButton(onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => RegisterScreen()),
-                        );
-                      }, child: Text("Register "))
+                      // TextButton(onPressed: () {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(builder: (context) => RegisterScreen()),
+                      //   );
+                      // }, child: Text("Register "))
                     ],
                   ),
                 ],
