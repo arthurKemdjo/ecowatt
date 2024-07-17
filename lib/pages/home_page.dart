@@ -3,6 +3,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 const List<String> dropdownItems = ['Jour', 'Semaine', 'Mois'];
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -190,25 +191,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
               // Two containers side by side
               Row(
-              children: [
-                Expanded(
-                  child: _buildLimitCard(),
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: _buildAddDeviceCard(),
-                ),
-              ],
-            ),
+                children: [
+                  Expanded(
+                    child: _buildLimitCard(),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: _buildAddDeviceCard(),
+                  ),
+                ],
+              ),
 
               const SizedBox(height: 20),
-              // Settings section
               _buildSettingsCard(),
-              _buildScheduleCard(),
-              const SizedBox(height: 20),
-              // Consumption per device and Theme settings
-              // _buildConsumptionAndThemeCard(),
-              _buildNotificationsCard()
+              const SizedBox(height: 10),
+              Center(
+                child: _buildScheduleCard(),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: _buildNotificationsCard(),
+              ),
             ],
           ),
         ),
@@ -248,7 +251,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
 
   Widget _buildLimitCard() {
     return Container(
@@ -371,22 +373,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
           ),
-
         ],
       ),
     );
   }
- 
+
   Widget _buildAddDeviceCard() {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: const Color(0xFFE6F3FF),
         borderRadius: BorderRadius.circular(32.0),
-      ),child: Column(
+      ),
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
@@ -401,47 +403,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ],
           ),
-        SizedBox(height: 16), // Espacement entre les éléments
-        Text(
-          'Bienvenue dans ECOWATT',
-          style: TextStyle(
-            color: Color(0xFF2E4145),
-            fontSize: 10,
-            fontFamily: 'Lufga',
-            fontWeight: FontWeight.w600,
+          SizedBox(height: 16), // Espacement entre les éléments
+          Text(
+            'Bienvenue dans ECOWATT',
+            style: TextStyle(
+              color: Color(0xFF2E4145),
+              fontSize: 10,
+              fontFamily: 'Lufga',
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center, // Centrer le texte
           ),
-          textAlign: TextAlign.center, // Centrer le texte
-        ),
-        SizedBox(height: 8), // Espacement entre les éléments
-        Text(
-          'Ajoutez des appareils connectés et gérez votre consommation en toute simplicité',
-          style: TextStyle(
+          SizedBox(height: 8), // Espacement entre les éléments
+          Text(
+            'Ajoutez des appareils connectés et gérez votre consommation en toute simplicité',
+            style: TextStyle(
               color: Color(0xFF808080),
               fontSize: 8,
               fontFamily: 'Lufga',
               fontWeight: FontWeight.w300,
             ),
-          textAlign: TextAlign.center, // Centrer le sous-texte
-        ),
-        SizedBox(height: 20),
-       SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0XFFFF3D00),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(60),
+            textAlign: TextAlign.center, // Centrer le sous-texte
+          ),
+          SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0XFFFF3D00),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60),
+                ),
+              ),
+              child: Text(
+                'Ajouter un appareil',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-            child: Text('Ajouter un appareil',style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8,
-                      fontFamily: 'Lufga',
-                      fontWeight: FontWeight.w500,
-                        ),),
           ),
-        ),
         ],
       ),
     );
@@ -465,7 +470,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Container(
                       width: 120,
-                      margin: EdgeInsets.only(left: 10, top: 1),
+                      margin: EdgeInsets.only(left: 4, top: 1),
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: Color(0xFF2C80F0),
@@ -498,44 +503,53 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 1),
-                Text(
-                  'Réglages et paramètres',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 8,
+                SizedBox(height: 4),
+                Padding(
+                  padding: EdgeInsets.only(left: 6.0), // Add left padding
+                  child: Text(
+                    'Réglages et paramètres',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
+                    ),
                   ),
                 ),
                 SizedBox(height: 8),
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: Icon(Icons.color_lens, size: 16, color: Colors.white,),
+                  icon: Icon(
+                    Icons.color_lens,
+                    size: 16,
+                    color: Colors.white,
+                  ),
                   label: Text(
                     'Modifier la couleur',
                     style: TextStyle(
-                      fontSize: 7,
-                      color: Colors.white,
-                      fontFamily: 'Lufga',
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 7,
+                        color: Colors.white,
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF2E4145),
                     minimumSize: Size(30, 32),
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 12),
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: Icon(Icons.wb_sunny, size: 16, color: Colors.white,),
+                  icon: Icon(
+                    Icons.wb_sunny,
+                    size: 16,
+                    color: Colors.white,
+                  ),
                   label: Text(
                     'Modifier la luminosité',
                     style: TextStyle(
-                      fontSize: 6,
-                      color: Colors.white,
-                      fontFamily: 'Lufga',
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 6,
+                        color: Colors.white,
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF1E628D),
@@ -572,13 +586,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         Text(
                           'Énergie consommée',
-                          style: TextStyle(fontSize: 7,
+                          style: TextStyle(
+                              fontSize: 7,
                               fontFamily: 'Lufga',
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           '17 Jun - 23 Jun',
-                          style: TextStyle(fontSize: 6, color: Colors.grey[600],
+                          style: TextStyle(
+                              fontSize: 6,
+                              color: Colors.grey[600],
                               fontFamily: 'Lufga',
                               fontWeight: FontWeight.bold),
                         ),
@@ -590,7 +607,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         fontFamily: 'Lufga',
                         fontWeight: FontWeight.bold,
                         fontSize: 10,
-
                       ),
                     ),
                   ],
@@ -607,13 +623,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         Text(
                           'Énergie économisée',
-                          style: TextStyle(fontSize: 7,
+                          style: TextStyle(
+                              fontSize: 7,
                               fontFamily: 'Lufga',
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           '17 Jun - 23 Jun',
-                          style: TextStyle(fontSize: 6, color: Colors.grey[600],
+                          style: TextStyle(
+                              fontSize: 6,
+                              color: Colors.grey[600],
                               fontFamily: 'Lufga',
                               fontWeight: FontWeight.bold),
                         ),
@@ -659,7 +678,9 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
       items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value, style: TextStyle(fontSize: 7,
+          child: Text(value,
+              style: TextStyle(
+                  fontSize: 7,
                   fontFamily: 'Lufga',
                   fontWeight: FontWeight.bold)),
         );
@@ -672,295 +693,362 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
     );
   }
 }
-  Widget _buildSettingSlider(String label) {
-    return Column(
+
+Widget _buildSettingSlider(String label) {
+  return Column(
+    children: [
+      Text(label),
+      Slider(
+        value: 0.4,
+        onChanged: (value) {},
+      ),
+    ],
+  );
+}
+
+Widget _buildConsumptionAndThemeCard() {
+  return Container(
+    padding: const EdgeInsets.all(16.0),
+    decoration: BoxDecoration(
+      color: Colors.yellow.withOpacity(0.1),
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+    child: const Column(
       children: [
-        Text(label),
-        Slider(
-          value: 0.4,
-          onChanged: (value) {},
-        ),
+        Text('Consommation par appareil'),
+        SizedBox(height: 20),
+        Text('Paramètres du thème'),
       ],
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildConsumptionAndThemeCard() {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.yellow.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: const Column(
-        children: [
-          Text('Consommation par appareil'),
-          SizedBox(height: 20),
-          Text('Paramètres du thème'),
-        ],
-      ),
-    );
-  }
+// Widget _buildDeviceCard() {
+//   return Container(
+//     margin: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
+//     padding: const EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0),
+//     decoration: BoxDecoration(
+//       color: Colors.blue.withOpacity(0.1),
+//       borderRadius: BorderRadius.circular(12.0),
+//     ),
+//     child: Row(
+//       children: [
+//         Expanded(
+//           // flex: 1, // 1/3 de la largeur de l'écran
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.stretch,
+//             children: [
+//               Text(
+//                 'Réglagges',
+//                 style: TextStyle(
+//                   fontFamily: 'Lufga',
+//                   fontWeight: FontWeight.bold,
+//                   fontSize: 4,
+//                 ),
+//               ),
+//               SizedBox(height: 16),
+//               ElevatedButton.icon(
+//                 onPressed: () {},
+//                 icon: Icon(Icons.color_lens, size: 9),
+//                 label: Text(
+//                   'Modifier la couleur',
+//                   style: TextStyle(fontSize: 7,
+//                     fontFamily: 'Lufga'),
+//                 ),
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Color(0xFF2E4145),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(30),
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: 8),
+//               ElevatedButton.icon(
+//                 onPressed: () {},
+//                 icon: Icon(Icons.wb_sunny, size: 9),
+//                 label: Text(
+//                   'Modifier la luminosité',
+//                   style: TextStyle(fontSize: 6,
+//                     fontFamily: 'Lufga',
+//                     fontWeight: FontWeight.bold),
+//                 ),
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Color(0xFF2E4145),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(30),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         VerticalDivider(
+//           color: Colors.white,
+//           thickness: 4.0,
+//           width: 50,
+//         ),
+//         Expanded(
+//           // flex: 2, // 2/3 de la largeur de l'écran
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   const Text(
+//                     'Résumé de l\'utilisation',
+//                     style: TextStyle(
+//                       fontFamily: 'Lufga',
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 8,
+//                     ),
+//                   ),
+//                   DropdownButton<String>(
+//                     value: 'Semaine',
+//                     items: <String>['Jour', 'Semaine', 'Mois']
+//                         .map<DropdownMenuItem<String>>((String value) {
+//                       return DropdownMenuItem<String>(
+//                         value: value,
+//                         child: Text(value, style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700,
+//                             fontFamily: 'Lufga',
+//                           )),
+//                       );
+//                     }).toList(),
+//                     onChanged: (String? newValue) {},
+//                   ),
+//                 ],
+//               ),
+//               Divider(
+//                 color: Colors.white,
+//                 thickness: 4.0,
+//               ),
+//               SizedBox(height: 8),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         'Énergie consommée',
+//                         style: TextStyle(fontSize: 8,
+//                         fontFamily: 'Lufga',
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                       ),
+//                       Text(
+//                         '17 Jun - 23 Jun',
+//                         style:
+//                             TextStyle(fontSize: 6, fontFamily: 'Lufga',
+//                           color: Colors.grey[600]),
+//                       ),
+//                     ],
+//                   ),
+//                   Text(
+//                     '74.92 kWh',
+//                     style: TextStyle(
+//                       fontFamily: 'Lufga',
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 6,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               Divider(
+//                 color: Colors.white,
+//                 thickness: 4.0,
+//               ),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         'Énergie économisée',
+//                         style: TextStyle(fontSize: 8,
+//                         fontFamily: 'Lufga',
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                       ),
+//                       Text(
+//                         '17 Jun - 23 Jun',
+//                         style:
+//                             TextStyle(fontSize: 6, color: Colors.grey[600]),
+//                       ),
+//                     ],
+//                   ),
+//                   Text(
+//                     '22.38 kWh',
+//                     style: TextStyle(
+//                       fontFamily: 'Lufga',
+//                       fontWeight: FontWeight.w700,
+//                       fontSize: 6,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
 
-  Widget _buildDeviceCard() {
-    return Container(
-      margin: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
-      padding: const EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            // flex: 1, // 1/3 de la largeur de l'écran
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Réglagges',
+//         ),
+//       ],
+//     ),
+//   );
+// }
+
+Widget _buildScheduleCard() {
+  return Container(
+    margin: EdgeInsets.only(top: 10.0),
+    padding: EdgeInsets.all(16.0),
+    decoration: BoxDecoration(
+      color: Color(0xFF2E4145),
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Plannifier vos horaires',
+              style: TextStyle(
+                fontFamily: 'Lufga',
+                fontSize: 8,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: Text('Plannifier',
                   style: TextStyle(
                     fontFamily: 'Lufga',
+                    fontSize: 8,
                     fontWeight: FontWeight.bold,
-                    fontSize: 4,
-                  ),
-                ),
-                SizedBox(height: 16),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Icon(Icons.color_lens, size: 9),
-                  label: Text(
-                    'Modifier la couleur',
-                    style: TextStyle(fontSize: 7,
-                      fontFamily: 'Lufga'),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF2E4145),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Icon(Icons.wb_sunny, size: 9),
-                  label: Text(
-                    'Modifier la luminosité',
-                    style: TextStyle(fontSize: 6,
-                      fontFamily: 'Lufga',
-                      fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF2E4145),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-              ],
+                    color: Colors.white,
+                  )),
             ),
-          ),
-          VerticalDivider(
-            color: Colors.white,
-            thickness: 4.0,
-            width: 50,
-          ),
-          Expanded(
-            // flex: 2, // 2/3 de la largeur de l'écran
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Résumé de l\'utilisation',
-                      style: TextStyle(
-                        fontFamily: 'Lufga',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 8,
-                      ),
-                    ),
-                    DropdownButton<String>(
-                      value: 'Semaine',
-                      items: <String>['Jour', 'Semaine', 'Mois']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value, style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700,
-                              fontFamily: 'Lufga',
-                            )),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {},
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.white,
-                  thickness: 4.0,
-                ),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Énergie consommée',
-                          style: TextStyle(fontSize: 8,
-                          fontFamily: 'Lufga',
-                          fontWeight: FontWeight.bold,
-                        ),
-                        ),
-                        Text(
-                          '17 Jun - 23 Jun',
-                          style:
-                              TextStyle(fontSize: 6, fontFamily: 'Lufga',
-                            color: Colors.grey[600]),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '74.92 kWh',
-                      style: TextStyle(
-                        fontFamily: 'Lufga',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 6,
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.white,
-                  thickness: 4.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Énergie économisée',
-                          style: TextStyle(fontSize: 8,
-                          fontFamily: 'Lufga',
-                          fontWeight: FontWeight.bold,
-                        ),
-                        ),
-                        Text(
-                          '17 Jun - 23 Jun',
-                          style:
-                              TextStyle(fontSize: 6, color: Colors.grey[600]),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '22.38 kWh',
-                      style: TextStyle(
-                        fontFamily: 'Lufga',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 6,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+          ],
+        ),
+        SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Créneau horaire :',
+              style: TextStyle(
+                fontFamily: 'Lufga',
+                fontSize: 8,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildScheduleCard() {
-    return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Color(0xFF2E4145),
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Plannifier vos horaires',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
+            Text(
+              'De ',
+              style: TextStyle(
                   color: Colors.white,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                child: Text('Plannifier', style: TextStyle(fontSize: 10)),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Créneau horaire :',
-                style: TextStyle(color: Colors.white, fontSize: 8),
-              ),
-              Text(
-                'De 16:00 A 17:00',
-                style: TextStyle(color: Colors.orange, fontSize: 8),
-              ),
-              Text(
-                'Période Lundi',
-                style: TextStyle(color: Colors.orange, fontSize: 8),
-              ),
-              Text(
-                'Status Eteint',
-                style: TextStyle(color: Colors.orange, fontSize: 8),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNotificationsCard() {
-    return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Color(0xFFFFE6B3),
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      height: 100, // Hauteur de 200 même s'il n'y a pas de contenu
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Notifications',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
             ),
-          ),
-          // Ajoutez ici des widgets pour les notifications
-        ],
-      ),
-    );
-  }
+            Text(
+              '16:00',
+              style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              ' A ',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              '17:00',
+              style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Periode',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Lun-Mar',
+              style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Status :',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Eteint',
+              style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: 8,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 
+Widget _buildNotificationsCard() {
+  return Container(
+    margin: EdgeInsets.only(top: 10.0),
+    padding: EdgeInsets.all(16.0),
+    decoration: BoxDecoration(
+      color: Color(0xFFFFE6B3),
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    height: 100,
+    width: double.infinity,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Notifications',
+          style: TextStyle(
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+            color: Color(0XFF2E4145),
+            fontFamily: 'Lufga',
+          ),
+        ),
+        // Ajoutez ici des widgets pour les notifications
+      ],
+    ),
+  );
+}
 
 // -------------------------- Recherche -----------------------------
 class SearchScreen extends StatefulWidget {
