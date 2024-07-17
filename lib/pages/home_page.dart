@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-
-
+const List<String> dropdownItems = ['Jour', 'Semaine', 'Mois'];
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    DashboardScreen(),
-    SearchScreen(),
-    ControlScreen(),
-    SettingsScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const DashboardScreen(),
+    const SearchScreen(),
+    const ControlScreen(),
+    const SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -29,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Accueil',
@@ -56,67 +60,155 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class ConsommationWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      radius: const Radius.circular(20),
+      padding: const EdgeInsets.all(6),
+      color: const Color(0xFF2C80F0),
+      strokeWidth: 1,
+      dashPattern: [6, 3],
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildConsommationItem("Aujourd'hui", "17.92 kWh", Colors.orange),
+            _buildVerticalDivider(),
+            _buildConsommationItem("Semaine", "74.92 kWh", Colors.blue),
+            _buildVerticalDivider(),
+            _buildConsommationItem("Mois", "664.92 kWh", Colors.red),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConsommationItem(String title, String value, Color valueColor) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 12,
+            fontFamily: 'Lufga',
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 10,
+            fontFamily: 'Lufga',
+            fontWeight: FontWeight.w600,
+            color: valueColor,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVerticalDivider() {
+    return Container(
+      height: 40,
+      width: 1,
+      color: const Color.fromARGB(255, 255, 255, 255),
+    );
+  }
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/profile_image.png'),
-              ),
-              SizedBox(width: 10),
-              Text(
-                'Hello, Jane Doe',
-                style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Spacer(),
-              Icon(
-                Icons.notifications,
-                color: Colors.black,
-              ),
-            ],
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Today's, Week's, and Month's consumption
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildConsumptionCard('Aujourd\'hui', '132.92 kWh', Colors.red),
-                  _buildConsumptionCard('Semaine', '74.92 kWh', Colors.blue),
-                  _buildConsumptionCard('Mois', '564.92 kWh', Colors.orange),
-                ],
+              const SizedBox(height: 30),
+              const Padding(
+                padding: EdgeInsets.only(left: 6),
+                child: Row(
+                  children: [
+                    Text(
+                      'Hello, ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      'Jane Doe',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Spacer(),
+                    CircleAvatar(
+                      radius: 14,
+                      backgroundImage: AssetImage('assets/images/profile.jpg'),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(
+                      Icons.notifications,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 20),
-              // Set a new limit section
-              _buildLimitCard(),
-              SizedBox(height: 20),
-              // Devices section
-              _buildDevicesCard(),
-              SizedBox(height: 20),
+
+              const SizedBox(height: 30),
+              // Today's, Week's, and Month's consumption
+              Center(
+                child: ConsommationWidget(),
+              ),
+              const SizedBox(height: 20),
+              // Two containers side by side
+              Row(
+              children: [
+                Expanded(
+                  child: _buildLimitCard(),
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: _buildAddDeviceCard(),
+                ),
+              ],
+            ),
+
+              const SizedBox(height: 20),
               // Settings section
               _buildSettingsCard(),
-              SizedBox(height: 20),
+              _buildScheduleCard(),
+              const SizedBox(height: 20),
               // Consumption per device and Theme settings
-              _buildConsumptionAndThemeCard(),
+              // _buildConsumptionAndThemeCard(),
+              _buildNotificationsCard()
             ],
           ),
         ),
@@ -137,18 +229,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
+                fontSize: 10,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               consumption,
-              style: TextStyle(
-                color: color,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 10,
               ),
             ),
           ],
@@ -157,138 +249,429 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+
   Widget _buildLimitCard() {
+    return Container(
+      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      decoration: BoxDecoration(
+        color: Colors.orange.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(32.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                width: 52,
+                margin: EdgeInsets.only(right: 10),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFA500),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  'Aujourd\'hui',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 6,
+                    fontFamily: 'Lufga',
+                    fontWeight: FontWeight.w200,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 2),
+          SizedBox(
+            height: 100,
+            child: SfRadialGauge(
+              axes: <RadialAxis>[
+                RadialAxis(
+                  minimum: 0,
+                  maximum: 100,
+                  showLabels: false,
+                  showTicks: false,
+                  startAngle: 180,
+                  endAngle: 0,
+                  radiusFactor: 0.8,
+                  axisLineStyle: AxisLineStyle(
+                    thickness: 0.1,
+                    color: Color.fromARGB(255, 255, 255, 255).withOpacity(1),
+                    thicknessUnit: GaugeSizeUnit.factor,
+                  ),
+                  pointers: <GaugePointer>[
+                    RangePointer(
+                      value: 75,
+                      width: 0.1,
+                      sizeUnit: GaugeSizeUnit.factor,
+                      color: Colors.orange,
+                      cornerStyle: CornerStyle.bothCurve,
+                    ),
+                  ],
+                  annotations: <GaugeAnnotation>[
+                    GaugeAnnotation(
+                      widget: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '55%',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'de la limite atteinte',
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontFamily: 'Lufga',
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      angle: 90,
+                      positionFactor: 0.5,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 2),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 116,
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFFA500),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text(
+                      'Définir une limite',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Lufga',
+                        fontSize: 8,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
+ 
+  Widget _buildAddDeviceCard() {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
+        color: const Color(0xFFE6F3FF),
+        borderRadius: BorderRadius.circular(32.0),
+      ),child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '55 %',
-                style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
+              Container(
+                height: 24,
+                width: 24,
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Color(0xFF2E4145),
+                  shape: BoxShape.circle,
                 ),
+                child: Icon(Icons.add, color: Colors.white, size: 8),
               ),
-              Text('Limit reached'),
             ],
           ),
-          SizedBox(height: 8),
-          ElevatedButton(
+        SizedBox(height: 16), // Espacement entre les éléments
+        Text(
+          'Bienvenue dans ECOWATT',
+          style: TextStyle(
+            color: Color(0xFF2E4145),
+            fontSize: 10,
+            fontFamily: 'Lufga',
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center, // Centrer le texte
+        ),
+        SizedBox(height: 8), // Espacement entre les éléments
+        Text(
+          'Ajoutez des appareils connectés et gérez votre consommation en toute simplicité',
+          style: TextStyle(
+              color: Color(0xFF808080),
+              fontSize: 8,
+              fontFamily: 'Lufga',
+              fontWeight: FontWeight.w300,
+            ),
+          textAlign: TextAlign.center, // Centrer le sous-texte
+        ),
+        SizedBox(height: 20),
+       SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
             onPressed: () {},
-            child: Text('Définir une limite'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.orange,
+              backgroundColor: Color(0XFFFF3D00),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(60),
               ),
+            ),
+            child: Text('Ajouter un appareil',style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                      fontFamily: 'Lufga',
+                      fontWeight: FontWeight.w500,
+                        ),),
+          ),
+        ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSettingsCard() {
+    return Container(
+      padding: const EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 120,
+                      margin: EdgeInsets.only(left: 10, top: 1),
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2C80F0),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Appareil actuel : ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 6,
+                                fontFamily: 'Lufga',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Light Bulb 50Wh',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 6,
+                                fontFamily: 'Lufga',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 1),
+                Text(
+                  'Réglages et paramètres',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 8,
+                  ),
+                ),
+                SizedBox(height: 8),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.color_lens, size: 16, color: Colors.white,),
+                  label: Text(
+                    'Modifier la couleur',
+                    style: TextStyle(
+                      fontSize: 7,
+                      color: Colors.white,
+                      fontFamily: 'Lufga',
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF2E4145),
+                    minimumSize: Size(30, 32),
+                  ),
+                ),
+                SizedBox(height: 8),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.wb_sunny, size: 16, color: Colors.white,),
+                  label: Text(
+                    'Modifier la luminosité',
+                    style: TextStyle(
+                      fontSize: 6,
+                      color: Colors.white,
+                      fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF1E628D),
+                    minimumSize: Size(30, 32),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Résumé de l\'utilisation',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 8,
+                      ),
+                    ),
+                    DropdownMenuExample(),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Énergie consommée',
+                          style: TextStyle(fontSize: 7,
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '17 Jun - 23 Jun',
+                          style: TextStyle(fontSize: 6, color: Colors.grey[600],
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '74.92 kWh',
+                      style: TextStyle(
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white.withOpacity(0.4),
+                  thickness: 1.5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Énergie économisée',
+                          style: TextStyle(fontSize: 7,
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '17 Jun - 23 Jun',
+                          style: TextStyle(fontSize: 6, color: Colors.grey[600],
+                              fontFamily: 'Lufga',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '22.38 kWh',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 10,
+                        fontFamily: 'Lufga',
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white.withOpacity(0.4),
+                  thickness: 1.5,
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildDevicesCard() {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDeviceCard(Icons.lightbulb_outline, 'Light Bulb'),
-              _buildDeviceCard(Icons.ac_unit, 'Air Con.'),
-              _buildDeviceCard(Icons.tv, 'Television'),
-            ],
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Energy Consumed'),
-              Text(
-                '74.92 kWh',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Energy Saved'),
-              Text(
-                '22.38 kWh',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+class DropdownMenuExample extends StatefulWidget {
+  const DropdownMenuExample({Key? key}) : super(key: key);
+
+  @override
+  _DropdownMenuExampleState createState() => _DropdownMenuExampleState();
+}
+
+class _DropdownMenuExampleState extends State<DropdownMenuExample> {
+  String dropdownValue = dropdownItems.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value, style: TextStyle(fontSize: 7,
+                  fontFamily: 'Lufga',
+                  fontWeight: FontWeight.bold)),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
     );
   }
-
-  Widget _buildDeviceCard(IconData icon, String label) {
-    return Column(
-      children: [
-        Icon(
-          icon,
-          color: Colors.blue,
-          size: 30,
-        ),
-        SizedBox(height: 8),
-        Text(label),
-      ],
-    );
-  }
-
-  Widget _buildSettingsCard() {
-    return Container(
-      padding: const EdgeInsets.only(top: 16.0,bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildSettingSlider('Vibrancy'),
-              _buildSettingSlider('Luminosity'),
-            ],
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Usage Summary'),
-              Text('74.92 kWh'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
+}
   Widget _buildSettingSlider(String label) {
     return Column(
       children: [
@@ -308,7 +691,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         color: Colors.yellow.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12.0),
       ),
-      child: Column(
+      child: const Column(
         children: [
           Text('Consommation par appareil'),
           SizedBox(height: 20),
@@ -317,38 +700,330 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+
+  Widget _buildDeviceCard() {
+    return Container(
+      margin: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
+      padding: const EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            // flex: 1, // 1/3 de la largeur de l'écran
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Réglagges',
+                  style: TextStyle(
+                    fontFamily: 'Lufga',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 4,
+                  ),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.color_lens, size: 9),
+                  label: Text(
+                    'Modifier la couleur',
+                    style: TextStyle(fontSize: 7,
+                      fontFamily: 'Lufga'),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF2E4145),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.wb_sunny, size: 9),
+                  label: Text(
+                    'Modifier la luminosité',
+                    style: TextStyle(fontSize: 6,
+                      fontFamily: 'Lufga',
+                      fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF2E4145),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          VerticalDivider(
+            color: Colors.white,
+            thickness: 4.0,
+            width: 50,
+          ),
+          Expanded(
+            // flex: 2, // 2/3 de la largeur de l'écran
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Résumé de l\'utilisation',
+                      style: TextStyle(
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 8,
+                      ),
+                    ),
+                    DropdownButton<String>(
+                      value: 'Semaine',
+                      items: <String>['Jour', 'Semaine', 'Mois']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value, style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700,
+                              fontFamily: 'Lufga',
+                            )),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {},
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 4.0,
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Énergie consommée',
+                          style: TextStyle(fontSize: 8,
+                          fontFamily: 'Lufga',
+                          fontWeight: FontWeight.bold,
+                        ),
+                        ),
+                        Text(
+                          '17 Jun - 23 Jun',
+                          style:
+                              TextStyle(fontSize: 6, fontFamily: 'Lufga',
+                            color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '74.92 kWh',
+                      style: TextStyle(
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 6,
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 4.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Énergie économisée',
+                          style: TextStyle(fontSize: 8,
+                          fontFamily: 'Lufga',
+                          fontWeight: FontWeight.bold,
+                        ),
+                        ),
+                        Text(
+                          '17 Jun - 23 Jun',
+                          style:
+                              TextStyle(fontSize: 6, color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '22.38 kWh',
+                      style: TextStyle(
+                        fontFamily: 'Lufga',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 6,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScheduleCard() {
+    return Container(
+      margin: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Color(0xFF2E4145),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Plannifier vos horaires',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: Text('Plannifier', style: TextStyle(fontSize: 10)),
+              ),
+            ],
+          ),
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Créneau horaire :',
+                style: TextStyle(color: Colors.white, fontSize: 8),
+              ),
+              Text(
+                'De 16:00 A 17:00',
+                style: TextStyle(color: Colors.orange, fontSize: 8),
+              ),
+              Text(
+                'Période Lundi',
+                style: TextStyle(color: Colors.orange, fontSize: 8),
+              ),
+              Text(
+                'Status Eteint',
+                style: TextStyle(color: Colors.orange, fontSize: 8),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotificationsCard() {
+    return Container(
+      margin: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Color(0xFFFFE6B3),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      height: 100, // Hauteur de 200 même s'il n'y a pas de contenu
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Notifications',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          // Ajoutez ici des widgets pour les notifications
+        ],
+      ),
+    );
+  }
+
+
+// -------------------------- Recherche -----------------------------
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class SearchScreen extends StatelessWidget {
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text('Recherche Screen'),
-        ),
+      appBar: AppBar(
+        title: const Text('Recherche'),
+      ),
+      body: const Center(
+        child: Text('Recherche Screen'),
       ),
     );
   }
 }
 
-class ControlScreen extends StatelessWidget {
+// -------------------------- Control -----------------------------
+class ControlScreen extends StatefulWidget {
+  const ControlScreen({super.key});
+
+  @override
+  _ControlScreenState createState() => _ControlScreenState();
+}
+
+class _ControlScreenState extends State<ControlScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Control Screen'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Control'),
+      ),
+      body: const Center(
+        child: Text('Control Screen'),
+      ),
     );
   }
 }
 
-class SettingsScreen extends StatelessWidget {
+// -------------------------- Paramètres -----------------------------
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Paramètres Screen'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Paramètres'),
+      ),
+      body: const Center(
+        child: Text('Paramètres Screen'),
+      ),
     );
   }
 }
-
-
-

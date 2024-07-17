@@ -71,7 +71,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 40.0),
+                        padding: const EdgeInsets.only(right: 70.0),
                         child: Column(
                           children: [
                             RichText(

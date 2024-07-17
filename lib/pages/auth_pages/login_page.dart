@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                         ),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 30),
                        TextField(
                         controller:  _passwordController,
                         style: TextStyle(color: Colors.white),
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                         ),
                       ),
-                      SizedBox(height: 70),
+                      SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(

@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 50),
+                      SizedBox(height: 30),
                       Text(
                         'Bienvenue',
                         style: TextStyle(
@@ -88,7 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 14),
                       Image.asset(
                         'assets/images/shapes.png',
                       ),

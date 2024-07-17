@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dotted_border: ^2.0.0+3
+  gauge_indicator: ^0.4.3
+  syncfusion_flutter_gauges: ^22.2.12 
 
 
   # The following adds the Cupertino Icons font to your application.
