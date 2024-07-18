@@ -1,3 +1,6 @@
+import 'package:ecowatt/pages/control_page.dart';
+import 'package:ecowatt/pages/search_page.dart';
+import 'package:ecowatt/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -66,73 +69,6 @@ class DashboardScreen extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _DashboardScreenState createState() => _DashboardScreenState();
-}
-
-class ConsommationWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DottedBorder(
-      borderType: BorderType.RRect,
-      radius: const Radius.circular(20),
-      padding: const EdgeInsets.all(6),
-      color: const Color(0xFF2C80F0),
-      strokeWidth: 1,
-      dashPattern: [6, 3],
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildConsommationItem("Aujourd'hui", "17.92 kWh", Colors.orange),
-            _buildVerticalDivider(),
-            _buildConsommationItem("Semaine", "74.92 kWh", Colors.blue),
-            _buildVerticalDivider(),
-            _buildConsommationItem("Mois", "664.92 kWh", Colors.red),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConsommationItem(String title, String value, Color valueColor) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: 'Lufga',
-            fontWeight: FontWeight.w600,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 10,
-            fontFamily: 'Lufga',
-            fontWeight: FontWeight.w600,
-            color: valueColor,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildVerticalDivider() {
-    return Container(
-      height: 40,
-      width: 1,
-      color: const Color.fromARGB(255, 255, 255, 255),
-    );
-  }
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
@@ -661,6 +597,73 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
+class ConsommationWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      radius: const Radius.circular(20),
+      padding: const EdgeInsets.all(6),
+      color: const Color(0xFF2C80F0),
+      strokeWidth: 1,
+      dashPattern: [6, 3],
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildConsommationItem("Aujourd'hui", "17.92 kWh", Colors.orange),
+            _buildVerticalDivider(),
+            _buildConsommationItem("Semaine", "74.92 kWh", Colors.blue),
+            _buildVerticalDivider(),
+            _buildConsommationItem("Mois", "664.92 kWh", Colors.red),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConsommationItem(String title, String value, Color valueColor) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 12,
+            fontFamily: 'Lufga',
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 10,
+            fontFamily: 'Lufga',
+            fontWeight: FontWeight.w600,
+            color: valueColor,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVerticalDivider() {
+    return Container(
+      height: 40,
+      width: 1,
+      color: const Color.fromARGB(255, 255, 255, 255),
+    );
+  }
+}
+
 class DropdownMenuExample extends StatefulWidget {
   const DropdownMenuExample({Key? key}) : super(key: key);
 
@@ -722,180 +725,6 @@ Widget _buildConsumptionAndThemeCard() {
     ),
   );
 }
-
-// Widget _buildDeviceCard() {
-//   return Container(
-//     margin: EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
-//     padding: const EdgeInsets.only(top: 1.0, left: 4.0, right: 4.0),
-//     decoration: BoxDecoration(
-//       color: Colors.blue.withOpacity(0.1),
-//       borderRadius: BorderRadius.circular(12.0),
-//     ),
-//     child: Row(
-//       children: [
-//         Expanded(
-//           // flex: 1, // 1/3 de la largeur de l'écran
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.stretch,
-//             children: [
-//               Text(
-//                 'Réglagges',
-//                 style: TextStyle(
-//                   fontFamily: 'Lufga',
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: 4,
-//                 ),
-//               ),
-//               SizedBox(height: 16),
-//               ElevatedButton.icon(
-//                 onPressed: () {},
-//                 icon: Icon(Icons.color_lens, size: 9),
-//                 label: Text(
-//                   'Modifier la couleur',
-//                   style: TextStyle(fontSize: 7,
-//                     fontFamily: 'Lufga'),
-//                 ),
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Color(0xFF2E4145),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(30),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 8),
-//               ElevatedButton.icon(
-//                 onPressed: () {},
-//                 icon: Icon(Icons.wb_sunny, size: 9),
-//                 label: Text(
-//                   'Modifier la luminosité',
-//                   style: TextStyle(fontSize: 6,
-//                     fontFamily: 'Lufga',
-//                     fontWeight: FontWeight.bold),
-//                 ),
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Color(0xFF2E4145),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(30),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//         VerticalDivider(
-//           color: Colors.white,
-//           thickness: 4.0,
-//           width: 50,
-//         ),
-//         Expanded(
-//           // flex: 2, // 2/3 de la largeur de l'écran
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   const Text(
-//                     'Résumé de l\'utilisation',
-//                     style: TextStyle(
-//                       fontFamily: 'Lufga',
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 8,
-//                     ),
-//                   ),
-//                   DropdownButton<String>(
-//                     value: 'Semaine',
-//                     items: <String>['Jour', 'Semaine', 'Mois']
-//                         .map<DropdownMenuItem<String>>((String value) {
-//                       return DropdownMenuItem<String>(
-//                         value: value,
-//                         child: Text(value, style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700,
-//                             fontFamily: 'Lufga',
-//                           )),
-//                       );
-//                     }).toList(),
-//                     onChanged: (String? newValue) {},
-//                   ),
-//                 ],
-//               ),
-//               Divider(
-//                 color: Colors.white,
-//                 thickness: 4.0,
-//               ),
-//               SizedBox(height: 8),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         'Énergie consommée',
-//                         style: TextStyle(fontSize: 8,
-//                         fontFamily: 'Lufga',
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                       ),
-//                       Text(
-//                         '17 Jun - 23 Jun',
-//                         style:
-//                             TextStyle(fontSize: 6, fontFamily: 'Lufga',
-//                           color: Colors.grey[600]),
-//                       ),
-//                     ],
-//                   ),
-//                   Text(
-//                     '74.92 kWh',
-//                     style: TextStyle(
-//                       fontFamily: 'Lufga',
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 6,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               Divider(
-//                 color: Colors.white,
-//                 thickness: 4.0,
-//               ),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         'Énergie économisée',
-//                         style: TextStyle(fontSize: 8,
-//                         fontFamily: 'Lufga',
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                       ),
-//                       Text(
-//                         '17 Jun - 23 Jun',
-//                         style:
-//                             TextStyle(fontSize: 6, color: Colors.grey[600]),
-//                       ),
-//                     ],
-//                   ),
-//                   Text(
-//                     '22.38 kWh',
-//                     style: TextStyle(
-//                       fontFamily: 'Lufga',
-//                       fontWeight: FontWeight.w700,
-//                       fontSize: 6,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-
-//         ),
-//       ],
-//     ),
-//   );
-// }
 
 Widget _buildScheduleCard() {
   return Container(
@@ -1048,70 +877,4 @@ Widget _buildNotificationsCard() {
       ],
     ),
   );
-}
-
-// -------------------------- Recherche -----------------------------
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
-
-  @override
-  _SearchScreenState createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recherche'),
-      ),
-      body: const Center(
-        child: Text('Recherche Screen'),
-      ),
-    );
-  }
-}
-
-// -------------------------- Control -----------------------------
-class ControlScreen extends StatefulWidget {
-  const ControlScreen({super.key});
-
-  @override
-  _ControlScreenState createState() => _ControlScreenState();
-}
-
-class _ControlScreenState extends State<ControlScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Control'),
-      ),
-      body: const Center(
-        child: Text('Control Screen'),
-      ),
-    );
-  }
-}
-
-// -------------------------- Paramètres -----------------------------
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  _SettingsScreenState createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Paramètres'),
-      ),
-      body: const Center(
-        child: Text('Paramètres Screen'),
-      ),
-    );
-  }
 }

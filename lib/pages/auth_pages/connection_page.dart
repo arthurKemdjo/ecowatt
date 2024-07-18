@@ -1,3 +1,4 @@
+import 'package:ecowatt/pages/auth_pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -92,6 +93,16 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                                       ),
                                     ),                  
                                     WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // Navigate to the desired interface
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  RegisterScreen() ),
+                                        );
+                                      },
                                       child: Align(
                                         alignment: Alignment.centerRight,
                                         child: Text(
@@ -100,12 +111,14 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                                             fontSize: 9,
                                             color: Colors.blue,
                                             fontFamily: 'Lufga',
-                                            decoration: TextDecoration.underline,
+                                            decoration:
+                                                TextDecoration.underline,
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
                                       ),
                                     ),
+                                  ),
                                   ],
                                 ),
                               ),

@@ -1,8 +1,3 @@
-import 'package:ecowatt/pages/auth_pages/connection_page.dart';
-import 'package:ecowatt/pages/auth_pages/login_page.dart';
-import 'package:ecowatt/pages/auth_pages/register_page.dart';
-import 'package:ecowatt/pages/home_page.dart';
-import 'package:ecowatt/pages/setting_page.dart';
 import 'package:ecowatt/pages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,11 +15,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(0, 255, 255, 255)),
         useMaterial3: true,
       ),
       home: WelcomeScreen (),
     );
   }
 }
+
+
 
