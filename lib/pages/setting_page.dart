@@ -44,28 +44,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16.0),
+        padding:
+            const EdgeInsets.only(left: 16.0, right: 16, bottom: 16, top: 50),
         children: [
           Row(
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/profile_picture.png'),
+              SizedBox(width: 18),
+              Container(
+                width: 30.0,
+                height: 30.0,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/profile.jpg'),
+                ),
               ),
-              SizedBox(width: 10),
-              Text('Jane Doe',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(width: 20),
+              Text(
+                'Jane Doe',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600),
+              ),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 16),
           _buildSettingsItem(Icons.person, 'Compte'),
+           SizedBox(height: 12),
           _buildSettingsItem(Icons.info, 'Informations personnelles'),
+          SizedBox(height: 12),
           _buildSettingsItem(Icons.lock, 'Mot de passe et sécurité'),
+          SizedBox(height: 12),
           _buildSettingsItem(Icons.language, 'Langue'),
+          SizedBox(height: 12),
           _buildSettingsItem(Icons.notifications, 'Notifications'),
+          SizedBox(height: 12),
           _buildSettingsItem(Icons.storage, 'Stockage de données'),
+          SizedBox(height: 12),
           _buildSettingsItem(Icons.privacy_tip, 'Politique de confidentialité'),
+          SizedBox(height: 8),
+          const Center(
+            child: 
+             Text(
+              'Powered by Arthur Kemdjo',
+              style: TextStyle(
+                  color: Color(0XFF808080),
+                  fontSize: 6,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
         ],
       ),
     );
@@ -74,8 +102,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSettingsItem(IconData icon, String title) {
     return ListTile(
       leading: Icon(icon),
-      title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios),
+      title: Text(
+        title,
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w600),
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -96,8 +130,8 @@ class _SettingsPageState extends State<SettingsPage> {
   String username = '@janedoe';
   String password = 'JDoeDane58';
   bool isEditingemail = false;
-   bool isEditingusername = false;
-   bool isEditingpassword = false;
+  bool isEditingusername = false;
+  bool isEditingpassword = false;
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _usernamecontroller = TextEditingController();
   TextEditingController _passwordcontroller = TextEditingController();
@@ -262,7 +296,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               const SizedBox(height: 14),
-               ListTile(
+              ListTile(
                 title: Text(
                   'Informations personnelles',
                   style: TextStyle(
@@ -352,7 +386,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ? Container(
                                 width: 80, // Largeur du champ de texte
                                 child: TextField(
-                                  controller:  _usernamecontroller,
+                                  controller: _usernamecontroller,
                                   onSubmitted: (value) {
                                     setState(() {
                                       username = value;
@@ -388,7 +422,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 14),
               ListTile(
-                title: Text('Sécurité',
+                title: Text(
+                  'Sécurité',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
@@ -396,7 +431,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
               ),
-       ListTile(
+              ListTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -460,19 +495,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
-
-              
               ListTile(
-                leading: Icon(Icons.security),
-                title: Text('2FA Authentification',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontFamily: 'Inter',
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
+                  leading: Icon(Icons.security),
+                  title: Text(
+                    '2FA Authentification',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontFamily: 'Inter',
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                trailing: Transform.scale(
+                  trailing: Transform.scale(
                     scale: 0.5, // Ajustez cette valeur pour changer la taille
                     child: Switch(
                       value: is2FAEnabled,
@@ -482,19 +516,18 @@ class _SettingsPageState extends State<SettingsPage> {
                         });
                       },
                     ),
-                  )
-
-
-              ),
+                  )),
               SizedBox(height: 14),
               ListTile(
-                title: Text('Notifications',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontFamily: 'Inter',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),),
+                title: Text(
+                  'Notifications',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontFamily: 'Inter',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               ListTile(
                 title: Row(
@@ -502,13 +535,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     Column(
                       children: [
-                        Text('Activer',
+                        Text(
+                          'Activer',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontFamily: 'Inter',
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
-                          ),),
+                          ),
+                        ),
                         Radio(
                           value: true,
                           groupValue: isNotificationsEnabled,
@@ -522,7 +557,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     Column(
                       children: [
-                        Text('Désactiver',
+                        Text(
+                          'Désactiver',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontFamily: 'Inter',
@@ -542,6 +578,16 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ],
+                ),
+              ),
+              const Center(
+                child: Text(
+                  'Powered by Arthur Kemdjo',
+                  style: TextStyle(
+                      color: Color(0XFF808080),
+                      fontSize: 6,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ],
